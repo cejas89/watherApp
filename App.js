@@ -1,10 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
+  const [texItem, settextItem] = useState("");
+  const [itemList, setitemList] = useState([]);
+  const [modalVisible, setmodalVisible] = useState(false);
+
+
+
+
+
+
+
+
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hola coders!!</Text>
+      <View style={styles.tittleContainer}>
+        <Text style={styles.tittle}>Shopping List</Text>
+        <TextInput style={styles.inputContainer} placeholder='ingresa aqui tu informacion'></TextInput>
+      </View>
+      <View style={{ flex: 1 }}>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text>Presiona Aqui</Text>
+        </TouchableOpacity>
+
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,16 +35,35 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 10,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'blue',
   },
-  text: {
+  tittleContainer: {
+    flex: 1
+
+
+  },
+  tittle: {
+    flex: 1,
+    textAlign: 'center',
     fontSize: 50,
-    color: "blue",
-    textDecorationLine: "underline",
-    fontWeight: "800"
+    fontWeight: 'bold'
+
+  },
+  inputContainer: {
+    flex: 1,
+    backgroundColor: 'purple',
+    margin: 10,
+    borderColor: 'green',
+    borderWidth: 5,
+
+  },
+  buttonContainer: {
+    flex: 1,
+    backgroundColor: 'yellow',
+    margin: 10,
+
   }
-  
+
+
+
 });
