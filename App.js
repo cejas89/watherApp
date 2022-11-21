@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View, FlatList } from 'react-native';
+import Modal from "./components/Modal";
 
 export default function App() {
   const [textItem, setTextItem] = useState("");
   const [list, setList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemSelected, setItemSelected] = useState({});
 
   const onHandleChange = (t) => setTextItem(t);
 
@@ -15,6 +18,21 @@ export default function App() {
       { id: Math.random().toString(), value: textItem },
     ]);
     setTextItem("");
+  };
+
+  const selectedItem = (id) => {
+    console.log(id);
+    setItemSelected(list.find((item) => item.id === id));
+    setModalVisible(true);
+  };
+
+  const deleteItem = () => {
+    console.log(itemSelected);
+    setList((currentState) =>
+      currentState.filter((item) => item.id !== itemSelected.id)
+    );
+    setItemSelected({});
+    setModalVisible(false);
   };
 
   const renderItem = ({ item }) => (
@@ -40,12 +58,17 @@ export default function App() {
         onPress={addItem}>
           <Text style={{textAlign: 'center', color: "white"}}>Presiona Aqui</Text>
         </TouchableOpacity>
+        <View>
         <FlatList
           data={list}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
+        <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} />
+        </View>
+       
       </View>
+     
       <StatusBar style="auto" />
     </View>
   );
